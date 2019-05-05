@@ -1,0 +1,22 @@
+%产生信号Generate signal
+xn=-4*pi:pi/20:4*pi;%例如产生sinc函数
+subplot(121)
+plot(xn,sinc(xn));
+grid on
+%参数设置Parameter setting 
+Fs=1000;
+nfft=512;
+window=hamming(64);
+noverlap=0;
+%计算功率谱 Calculate Power spectral density
+Pxx=pwelch(xn,window,noverlap,nfft,'twosided'); %#ok<*DPSD>
+mmax=max(Pxx);Pxx=Pxx/mmax;
+%绘制图形
+Index=0:1:round(nfft/2-1);
+K=Index*Fs/nfft;
+plot_Pxx=10*log10(Pxx(Index+1));
+subplot(122)
+plot(K,plot_Pxx);
+grid on
+title('使用Hamming窗的功率谱估计的对数曲线')
+ylabel('Welch Power Spectrum Estimation')
