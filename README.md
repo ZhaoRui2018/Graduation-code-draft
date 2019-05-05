@@ -1,2 +1,3 @@
 # Graduation-code-draft
-code backup for graduation project
+Code backup for graduation project
+2019-05-05 First test draft of Welch PSD method with Hamming window
